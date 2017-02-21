@@ -4,6 +4,12 @@ SNP genotypes for Infinium methylation chips, mostly derived from GIAB calls for
 
 The calls are identical on hm450 and hmEPIC (I checked, you can too: use the rgSet in minfiDataEPIC to get 3 replicates of GM12878 on EPIC; grab the ENCODE hm450 IDATs from [GEO](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE40699&format=file) and compare them.  They're identical) so I concentrated on the 58 unique SNPs common to both platforms. 
 
+```r
+library(minfi) 
+GM12878 <- makeGRangesFromDataFrame(read.csv(file="~/Dropbox/infiniumSnps/GM12878.csv", row.names=1), keep=TRUE)
+show(GM12878)
+```
+
 "Score" is the call from fitting a three-component Gaussian mixture model to a matrix of SNP beta values:
 
 ```r
