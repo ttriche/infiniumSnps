@@ -6,7 +6,7 @@ The calls are identical on hm450 and hmEPIC (I checked, you can too: use the rgS
 
 ```r
 library(minfi) 
-GM12878 <- makeGRangesFromDataFrame(read.csv(file="~/Dropbox/infiniumSnps/GM12878.csv", row.names=1), keep=TRUE)
+GM12878 <- makeGRangesFromDataFrame(read.csv(file="GM12878.csv", row.names=1), keep=TRUE)
 show(GM12878)
 ```
 
