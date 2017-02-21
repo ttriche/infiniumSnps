@@ -22,4 +22,4 @@ There are 18 rs probes common to EPIC and 450 where the base corresponding to th
 
 The other 40 probes have high-confidence GM12878 genotypes from Genome In A Bottle (NIST) lined up next to their hm450/hmEPIC genotype calls.  Anyone who wants to figure out the remaining 18 is welcome to submit a pull request, although it would be helpful if you indicate how (i.e. "IMR90 genotype", "H1 genotype", whatever).  
 
-At some point this will go into minfi.
+At some point this will go into minfi.  If you use these prior to that point, kindly cite or acknowledge the source.
