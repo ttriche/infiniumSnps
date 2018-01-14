@@ -33,11 +33,11 @@ seqinfo: 18 sequences from an unspecified genome; no seqlengths
 
 ```r
 library(minfiDataEPIC)
-GM12878.EPIC.SNPs <- getSnpBeta(RGsetEPIC)
+GM12878_EPIC_SNPs <- getSnpBeta(RGsetEPIC)
 
 library(mclust)
-mfit <- Mclust(as.numeric(GM12878.EPIC.SNPs), G=3)
-mcalls <- t(apply(GM12878.EPIC.SNPs, 1, function(x) predict(mfit, x)$classification))
+mfit <- Mclust(as.numeric(GM12878_EPIC_SNPs), G=3)
+mcalls <- t(apply(GM12878_EPIC_SNPs, 1, function(x) predict(mfit, x)$classification))
 GM12878$score <- rowMeans(mcalls)[names(GM12878)] # they are all identical, of course, but it never hurts to check
 ```
 
@@ -47,12 +47,10 @@ There are 18 rs probes common to EPIC and 450 where the base corresponding to th
 
 The other 40 probes have high-confidence GM12878 genotypes from Genome In A Bottle (NIST) lined up next to their hm450/hmEPIC genotype calls.  Anyone who wants to figure out the remaining 18 is welcome to submit a pull request, although it would be helpful if you indicate how (i.e. "IMR90 genotype", "H1 genotype", whatever).  
 
-If you have the SNP beta values in your GenomicRatioSet's metadata, for example, you can bolt the two together:
+For example, to make life easier, you could bolt the SNP probe beta values, their scores, or their calls onto the GRanges:
 
 ```r
-library(minfiDataEPIC) 
-source("https://raw.githubusercontent.com/ttriche/minfi/master/R/tcgaPipeline.R")
-GM12878_EPIC_SNPs <- metadata(tcgaPipeline(RGsetEPIC))$SNPs[names(GM12878), ] 
+GM12878_EPIC_SNPs <- GM12878_EPIC_SNPs[names(GM12878), ] 
 mcols(GM12878) <- cbind(mcols(GM12878)[, c("M","U")], GM12878_EPIC_SNPs)
 head(GM12878,2)
 # GRanges object with 2 ranges and 5 metadata columns:
