@@ -47,4 +47,25 @@ There are 18 rs probes common to EPIC and 450 where the base corresponding to th
 
 The other 40 probes have high-confidence GM12878 genotypes from Genome In A Bottle (NIST) lined up next to their hm450/hmEPIC genotype calls.  Anyone who wants to figure out the remaining 18 is welcome to submit a pull request, although it would be helpful if you indicate how (i.e. "IMR90 genotype", "H1 genotype", whatever).  
 
+If you have the SNP beta values in your GenomicRatioSet's metadata, for example, you can bolt the two together:
+
+```r
+library(minfiDataEPIC) 
+source("https://raw.githubusercontent.com/ttriche/minfi/master/R/tcgaPipeline.R")
+GM12878_EPIC_SNPs <- metadata(tcgaPipeline(RGsetEPIC))$SNPs[names(GM12878), ] 
+mcols(GM12878) <- cbind(mcols(GM12878)[, c("M","U")], GM12878_EPIC_SNPs)
+head(GM12878,2)
+# GRanges object with 2 ranges and 5 metadata columns:
+```
+
+|       ID|seqnames|ranges|strand|U|M|X200144450018_R04C01|X200144450019_R07C01|X200144450021_R05C01|
+|---------|--------|------|------|-|-|--------------------|--------------------|--------------------|
+|rs3936238|    chr1|[ 4031586,  4031586]|\*|A|G|0.0534766974|0.0504425326|0.0607401706|
+| rs877309|    chr1|[11412265, 11412265]|\*|G|A|0.5237327350|0.5314140191|0.5298953202|
+
+```r
+seqinfo: 18 sequences from an unspecified genome; no seqlengths
+```
+If you do things this way, i.e. bolt your actual SNP probe intensities and/or "calls" onto the side of the GRanges, you can perform subsetByOverlaps queries against e.g. GWAS data, or liftOver the sites to a different genome, or the usual stunts.  You don't have to, of course, but it may make your life easier, especially if "barcoding" samples by shared SNPs. 
+
 At some point this will most likely go into minfi.  If you use it prior to then, kindly cite or acknowledge the source.
