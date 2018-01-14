@@ -9,7 +9,13 @@ library(minfi)
 GM12878 <- makeGRangesFromDataFrame(
     read.csv(file="https://raw.githubusercontent.com/ttriche/infiniumSnps/master/GM12878.csv", row.names=1), 
   keep=TRUE)
-message("Please link to https://github.com/ttriche/infiniumSnps in your methods section if you use this in a paper."
+message("Please link to https://github.com/ttriche/infiniumSnps in your methods section,")
+message("if you use this data in a paper or to develop your own methods. Thank you. --t")
+```
+*Please link to https://github.com/ttriche/infiniumSnps in your methods section,    
+if you use this data in a paper or to develop your own methods. Thank you. --t*
+
+```r
 head(GM12878, 2)
 # GRanges object with 2 ranges and 6 metadata columns:
 ```
@@ -23,7 +29,7 @@ head(GM12878, 2)
 seqinfo: 18 sequences from an unspecified genome; no seqlengths
 ```
 
-"Score" (above, column after "strand") is the call from fitting a three-component Gaussian mixture model to a matrix of SNP beta values:
+"Score" (above, after "strand") is the call from fitting a 3-component mixture model to the SNP beta values:
 
 ```r
 library(minfiDataEPIC)
