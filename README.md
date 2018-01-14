@@ -6,7 +6,10 @@ The calls are identical on hm450 and hmEPIC (I checked, you can too: use the rgS
 
 ```r
 library(minfi) 
-GM12878 <- makeGRangesFromDataFrame(read.csv(file="GM12878.csv", row.names=1), keep=TRUE)
+GM12878 <- makeGRangesFromDataFrame(
+    read.csv(file="https://raw.githubusercontent.com/ttriche/infiniumSnps/master/GM12878.csv", row.names=1), 
+  keep=TRUE)
+message("Please link to https://github.com/ttriche/infiniumSnps in your methods section if you use this in a paper."
 show(GM12878)
 ```
 
@@ -28,4 +31,4 @@ There are 18 rs probes common to EPIC and 450 where the base corresponding to th
 
 The other 40 probes have high-confidence GM12878 genotypes from Genome In A Bottle (NIST) lined up next to their hm450/hmEPIC genotype calls.  Anyone who wants to figure out the remaining 18 is welcome to submit a pull request, although it would be helpful if you indicate how (i.e. "IMR90 genotype", "H1 genotype", whatever).  
 
-At some point this will go into minfi.  If you use these prior to that point, kindly cite or acknowledge the source.
+At some point this will most likely go into minfi.  If you use it prior to then, kindly cite or acknowledge the source.
